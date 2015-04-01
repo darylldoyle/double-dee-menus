@@ -17,14 +17,14 @@ Pass in your two elements, first the click object and second the menu object
 ```
 
 ```javascript
-    var headerMenu = menu(document.getElementById('MenuButton'), document.getElementById('menu-ul'));
+    var headerMenu = doubleDeeMenu(document.getElementById('MenuButton'), document.getElementById('menu-ul'));
 ```
 
 
 You can also programmatically toggle the menu using the public API
 
 ```
-    var headerMenu = menu(document.getElementById('MenuButton'), document.getElementById('menu-ul'));
+    var headerMenu = doubleDeeMenu(document.getElementById('MenuButton'), document.getElementById('menu-ul'));
    
     // Add the open class
     headerMenu.open();

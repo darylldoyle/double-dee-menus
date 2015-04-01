@@ -5,7 +5,7 @@
  * @param menu
  * @returns {{open: open, close: (close|Function|Window.close)}}
  */
-function menu(button, menu) {
+function doubleDeeMenu(button, menu) {
 
     /**
      * Check for button clicks and handle them
@@ -47,7 +47,7 @@ function menu(button, menu) {
     }
 
     /**
-     * Manually close the menu
+     * Manually open the menu
      */
     function open() {
         if (menu.classList)
@@ -57,7 +57,7 @@ function menu(button, menu) {
     }
 
     /**
-     * Manually open the menu
+     * Manually close the menu
      */
     function close() {
         if (menu.classList)
