@@ -3,19 +3,55 @@
  *
  * @param button
  * @param menu
+ * @param childMenuClass
  * @returns {{open: open, close: (close|Function|Window.close)}}
  */
-function doubleDeeMenu(button, menu) {
+function doubleDeeMenu(button, menu, childMenuClass) {
+
+    /**
+     * Check for presence of child menu
+     */
+    childMenuClass = typeof childMenuClass !== 'undefined' ? childMenuClass : false;
 
     /**
      * Check for button clicks and handle them
      */
     if (button.addEventListener) {
-        button.addEventListener('click', toggleMenu);
+        button.addEventListener('click', function() {
+            toggleMenu(menu);
+        });
     } else {
         button.attachEvent('on' + 'click', function(){
-            toggleMenu.call();
+            toggleMenu(menu);
         });
+    }
+
+    /**
+     * Bind the toggle event to any child menus if present
+     */
+    if (childMenuClass !== false) {
+        forEach(childMenuClass, function(el, i){
+            if (el.addEventListener) {
+                el.addEventListener('click', function() {
+                    toggleMenu(el);
+                });
+            } else {
+                el.attachEvent('on' + 'click', function() {
+                    toggleMenu(el);
+                });
+            }
+        });
+    }
+
+    /**
+     * Private for each function
+     *
+     * @param array
+     * @param fn
+     */
+    function forEach(array, fn) {
+        for (i = 0; i < array.length; i++)
+            fn(array[i], i);
     }
 
     /**
@@ -23,13 +59,14 @@ function doubleDeeMenu(button, menu) {
      *
      * @param event
      */
-    function toggleMenu(event) {
+    function toggleMenu(item) {
+        //console.log(item);
         event.preventDefault();
 
-        if (menu.classList) {
-            menu.classList.toggle('open');
+        if (item.classList) {
+            item.classList.toggle('open');
         } else {
-            var classes = menu.className.split(' ');
+            var classes = item.className.split(' ');
             var existingIndex = -1;
             for (var i = classes.length; i--;) {
                 if (classes[i] === 'open')
@@ -41,7 +78,7 @@ function doubleDeeMenu(button, menu) {
             else
                 classes.push('open');
 
-            menu.className = classes.join(' ');
+            item.className = classes.join(' ');
         }
     }
 
@@ -67,6 +104,6 @@ function doubleDeeMenu(button, menu) {
 
     return {
         open: open,
-        close: close,
+        close: close
     }
 }
