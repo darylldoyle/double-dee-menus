@@ -24,7 +24,6 @@ function doubleDeeMenu(button, menu) {
      * @param event
      */
     function toggleMenu(event) {
-        console.log(menu);
         event.preventDefault();
 
         if (menu.classList) {
