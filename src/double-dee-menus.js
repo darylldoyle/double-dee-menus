@@ -57,7 +57,7 @@ function doubleDeeMenu(button, menu, childMenuClass) {
     /**
      * Private function used to toggle the menu on click
      *
-     * @param event
+     * @param item
      */
     function toggleMenu(item) {
         //console.log(item);
